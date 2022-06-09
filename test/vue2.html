@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<body>
+  
+  <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+  <!-- <script src="./beautifyQrcode.js" type="module"></script> -->
+  
+  <div id="root">
+    <div v-html="getQRCode"></div>
+  </div>
+
+  <script>
+    // import { Base64 } from 'js-base64';
+    import {
+        encodeData,
+        // renderer25D,
+        rendererRect,
+        // rendererRound,
+        // rendererRandRound,
+        // rendererDSJ,
+        // rendererRandRect,
+        // rendererImage,
+        // rendererResImage,
+    } from './beautifyQrcode.js';
+      
+    
+    var app = new Vue({
+      name: 'my-app',
+      // CSS selector of the root DOM element
+      el: '#root',
+      // Some data
+      data () {
+        return {
+          message: 'Hello Vue.js!',
+          qrcode: encodeData({
+            text: 'http://www.baidu.com',
+            correctLevel: 0,
+          }),
+          options: {
+            icon: './icon.png',
+            title: 'dtmp'
+          },
+          base64Svg: ''
+        }
+      },
+      computed: {
+        getQRCode() {
+          return rendererRect(this.qrcode, this.options)
+        }
+      },
+    })
+  </script>
+
+</body>
+</html>

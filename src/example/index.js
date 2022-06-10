@@ -27,23 +27,26 @@ import Rem from '@/images/Rem.jpg';
 
 window.onload = () => {
     const qrcode = encodeData({
-        // text: 'https://developer.mozilla.org/en-US/docs/Web/SVG/Element/image',// QRBTF_URL,
-        text: 'https://mail.126.com/js6/main.jsp?sid=PAesQllDgNSkaiCDMTDDscKJtJzYgVkh&df=mail163_letter#module=compose.ComposeModule%7C%7B%22type%22%3A%22compose%22%2C%22fullScreen%22%3Atrue%2C%22cid%22%3A%22c%3A1654847557738%22%7D',
+        text: 'https://developer.mozilla.org/en-US/docs/Web/SVG/Element/image',// QRBTF_URL,
+        // text: 'https://mail.126.com/js6/main.jsp?sid=PAesQllDgNSkaiCDMTDDscKJtJzYgVkh&df=mail163_letter#module=compose.ComposeModule%7C%7B%22type%22%3A%22compose%22%2C%22fullScreen%22%3Atrue%2C%22cid%22%3A%22c%3A1654847557738%22%7D',
         correctLevel: 0,
     });
     const param = {
-        posType: 1, 
-        // icon: {
-        //     iconImg: defaultImage, 
-        //     // iconImg: 'logo.png'
-        //     // color: 'red'
-        // }, 
+        type :0,
+        posType: 1,
+        otherColor: '#445678',
+        posColor: '#223344',
+        icon: {
+            iconImg: defaultImage
+        },
+        // title中还可以添加其他属性，参考svg <text>标签属性
         title: {
-            name: '第二季度满意度数字化管理平台欢迎您来参与好家伙一二三四五', 
-            // fontSize: 3, 
-            // color: '#ffcd43', 
-            style: {'font-sizes': 3, 'fill': '#123456'}
-            },
+            name: '二维码标题',
+            style: {
+                'font-size': 4,
+                'color': '#12345',
+            }
+        }
     }
     const A1 = rendererRect(qrcode, param);
     // const A1 = rendererRect(qrcode, {icon:'../assests/logo.png',title:'dtmp'});

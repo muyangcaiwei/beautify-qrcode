@@ -1,3 +1,4 @@
+import {isNull} from './util'
 export default function drawIcon(qrcode, params) {
     if (!qrcode) return [];
     if (!params) return [];
@@ -9,23 +10,10 @@ export default function drawIcon(qrcode, params) {
     const icon = params[params.length - 2]
     // const titleFont = params[params.length - 4]
     const iconScale = 0.33
-
+    if (isNull(icon) && isNull(title)) return null;
     const {
         iconImg
     } = icon;
-
-    const {
-        name,
-        // fontSize,
-        // color,
-        style
-    } = title;
-
-    const fontSize = style['font-size'] || 3
-    const fill = style.fill
-
-
-    if (!icon && !title) return null;
     // const { fontSize, color, verticalAlign, ...titleStyle } = styles.title || {};
     // const {verticalAlign } = styles.title || {};
 
@@ -38,7 +26,7 @@ export default function drawIcon(qrcode, params) {
     const iconXY = (nCount - iconSize) / 2;
 
     const pointList = [];
-    if (Object.keys(icon).length !== 0 ) {
+    if (!isNull(icon) ) {
         pointList.push(
             `<rect 
                 key="${1}" 
@@ -54,7 +42,7 @@ export default function drawIcon(qrcode, params) {
         pointList.push(
             `<image 
                 key="${2}" 
-                href="${iconImg}" 
+                xlink:Href="${iconImg}" 
                 width="${iconSize - 2}" 
                 x="${iconXY + 1}" 
                 y="${iconXY + 1}" 
@@ -62,7 +50,20 @@ export default function drawIcon(qrcode, params) {
         );
     }
 
-    if (Object.keys(title).length !== 0) {
+    if (!isNull(title)) {
+        const {
+            name,
+            // fontSize,
+            // color,
+            style
+        } = title;
+    
+        var fontSize
+        var fill
+        if(!isNull(style)) {
+            fontSize = style['font-size'] || 3
+            fill = style.fill
+        }
         // const svgWidth = styles.svg && styles.svg.width ? styles.svg.width.replace("px", "") : 300;
         // const titleFontSize = Number(nCount + nCount / 5 * 2) * (titleSize || fontSize || 12) / svgWidth;
         const titleFontSize = fontSize || 3
